@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sell Used Books</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/sell.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="js/bootstrap.min.js"></script>
+    <style>
+      /* Styles for the book search form */
+
+      .checked {
+  color: orange;
+}
+      form {
+        margin: 20px;
+        display: flex;
+        justify-content: center;
+      }
+      input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        width: 50%;
+        margin-right: 10px;
+      }
+      input[type="submit"] {
+        padding: 10px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="bg-primary py-3">
+		<div class="container">
+		  <h1 class="text-light">Sell Used Books</h1>
+		  <nav class="navbar navbar-expand-lg navbar-dark">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+			  <ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+				  <a class="nav-link" href="Index.php">Home</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="#">Buy Used Books</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="contact.php">Contact Us</a>
+				</li>
+			  </ul>
+			</div>
+		  </nav>
+		</div>
+	  </header>
+      <div class="container">
+		<h1>How Does Selling Books Online Work?</h1>
+		<div class="steps">
+		  <div class="step">
+			<img src="images/searchICon.jpg" alt="Find Your Book">
+			<p>Find Your Book</p>
+		  </div>
+		  <div class="step">
+			<img src="images/shipping.png" alt="Ship for Free">
+			<p>Ship for Free</p>
+		  </div>
+		  <div class="step">
+			<img src="images/money.png" alt="Get Cash for Your Books">
+			<p>Get Cash for Your Books</p>
+		  </div>
+		</div>
+		<p>The shipping costs are covered: we provide a printable shipping label, and you attach it to your package.</p>
+		<p>Receive the payment promptly by check or PayPal after your order has been processed.</p>
+
+
+    <h1 style="color: #3e8e41;">Sell Books For Cash</h1>
+    <form>
+      <input type="text" id="book-search" placeholder="Search for a book...">
+      <input type="submit" value="Search">
+    </form>
+    <div id="book-results"></div>
+    <script>
+      // JavaScript code for the book search form
+      const apiKey = 'AIzaSyCnZuXAxkMskdtVdOyZpDCo4R1d5Hw64gY';
+      const apiUrl = 'https://www.googleapis.com/books/v1/volumes';
+
+      const form = document.querySelector('form');
+      form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
+        const searchInput = document.querySelector('#book-search');
+        const searchQuery = searchInput.value;
+        const queryUrl = `${apiUrl}?q=${searchQuery}&key=${apiKey}`;
+        fetch(queryUrl)
+          .then(response => response.json())
+          .then(data => {
+            const bookResults = document.querySelector('#book-results');
+            bookResults.innerHTML = ''; // Clear previous search results
+            data.items.forEach(item => {
+              const bookTitle = item.volumeInfo.title;
+              const bookAuthors = item.volumeInfo.authors.join(', ');
+              const bookImage = item.volumeInfo.imageLinks?.thumbnail;
+              const bookInfo = `
+                <div>
+                  <h2>${bookTitle}</h2>
+                  <p>By ${bookAuthors}</p>
+                  <img src="${bookImage}" alt="${bookTitle} cover" style="; margin-right:10px;">
+                </div>
+              `;
+              bookResults.insertAdjacentHTML('beforeend', bookInfo); // Add book information to search results
+            });
+          })
+          .catch(error => console.error(error));
+      });
+    </script>
+  
+<section id="customer-reviews">
+    <h2>Our Customers Love Us</h2>
+    <p>Our customers can’t be wrong. Green Book System is the best place to sell books online. For every book sold to Green Book System, we pay back with cash and a great user experience.</p>
+  
+    <div class="customer-review">
+
+      <h2>Jack</h2>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+
+      <p class="review-date">09 Mar 2023</p>
+      <p>I appreciate the fast turn-around on order process...</p>
+    </div>
+  
+    <div class="customer-review">
+        <h2>Najmo</h2>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+      <p class="review-date">09 Mar 2023</p>
+      <p>Things were good. Book shipped quickly</p>
+    </div>
+  
+    <div class="customer-review">
+        <h2>Hamdi</h2>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star "></span>
+      <p class="review-date">09 Mar 2023</p>
+      <p>Great price. Fast delivery. Books in condition des...</p>
+    </div>
+  
+    <div class="customer-review">
+        <h2>Zaki</h2>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+      <p class="review-date">09 Mar 2023</p>
+      <p>very fast, very efficient, very good price, very e...</p>
+    </div>
+  </section>
+  
+  </body>
+</html>
